@@ -1,0 +1,14 @@
+/* src/styles/responsive.css */
+@media (max-width: 768px) {
+  .container-custom {
+    @apply px-4;
+  }
+  
+  h1 {
+    font-size: 2rem !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+  }
+}
