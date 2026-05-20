@@ -17,15 +17,17 @@ const AdminDashboard = () => {
   }, [navigate])
 
   return (
-    <div className="flex min-h-screen bg-darker">
+    <div className="min-h-screen bg-darker">
       <AdminSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="flex-1">
+
+      <div className="min-h-screen md:ml-64">
         <AdminNavbar />
-        <div className="p-6">
+
+        <main className="p-4 md:p-6">
           {activeTab === 'dashboard' && (
             <div>
               <h2 className="text-3xl font-bold mb-6">Dashboard Overview</h2>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
                 {[
                   { label: 'Total Projects', value: '156', change: '+12%' },
                   { label: 'Active Clients', value: '48', change: '+8%' },
@@ -44,7 +46,7 @@ const AdminDashboard = () => {
             </div>
           )}
           {activeTab === 'upload' && <VideoUploadForm />}
-        </div>
+        </main>
       </div>
     </div>
   )
