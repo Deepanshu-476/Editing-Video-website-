@@ -1,5 +1,6 @@
 // src/components/contact/ContactForm.jsx
 import React, { useState } from 'react'
+import { submitContactForm } from '../../services/contactService'
 import { FaUser, FaEnvelope, FaPhone, FaComment, FaPaperPlane } from 'react-icons/fa'
 
 const ContactForm = () => {
@@ -23,13 +24,14 @@ const ContactForm = () => {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      await submitContactForm(formData)
       setSubmitted(true)
       setTimeout(() => setSubmitted(false), 5000)
       setFormData({ name: '', email: '', phone: '', message: '' })
-    }, 1500)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
