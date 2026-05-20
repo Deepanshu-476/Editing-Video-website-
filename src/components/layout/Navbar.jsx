@@ -32,13 +32,12 @@ const Navbar = () => {
       <div className="container-custom">
         <div className="flex justify-between items-center py-4">
           <Link to="/" className="flex items-center space-x-2 group">
-            <div className="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
-              <FaPlay className="text-white text-xl" />
+            <div className="">
             </div>
             <img
-              src="/favicon.svg"
+              src="/logo.png"
               alt="EditFlow logo"
-              className="h-8 w-auto"
+              className="h-14 w-auto"
             />
           </Link>
 
