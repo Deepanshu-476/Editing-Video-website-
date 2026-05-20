@@ -6,21 +6,25 @@
 @tailwind utilities;
 
 @layer base {
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;  /* ← YEH LINE ADD KAREIN */
   }
-  
+
   body {
     font-family: 'Inter', sans-serif;
     background-color: #0a0a0a;
     color: #ffffff;
-    overflow-x: hidden;  /* ← YEH LINE ADD KAREIN */
-    width: 100%;
     position: relative;
   }
-  
-  /* ← YEH PURA BLOCK ADD KAREIN */
+
   * {
     margin: 0;
     padding: 0;
@@ -31,17 +35,16 @@
 @layer components {
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-    overflow-x: hidden;  /* ← YEH LINE ADD KAREIN */
   }
-  
+
   .gradient-text {
     @apply bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent;
   }
-  
+
   .gradient-bg {
     @apply bg-gradient-to-r from-purple-600 to-pink-600;
   }
-  
+
   .card-hover {
     @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl;
   }
@@ -51,6 +54,7 @@
   .animation-delay-200 {
     animation-delay: 0.2s;
   }
+
   .animation-delay-400 {
     animation-delay: 0.4s;
   }
