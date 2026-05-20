@@ -36,7 +36,7 @@ const Navbar = () => {
               <FaPlay className="text-white text-xl" />
             </div>
             <span className="text-2xl font-bold gradient-text">
-              EditFlow
+              NishMediaCo.
             </span>
           </Link>
 
