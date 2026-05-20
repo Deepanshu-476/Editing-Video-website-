@@ -1,5 +1,6 @@
 // src/pages/Login.jsx
 import React, { useState } from 'react'
+import { loginAdmin } from '../services/authService'
 import { useNavigate } from 'react-router-dom'
 import { FaEnvelope, FaLock, FaSignInAlt } from 'react-icons/fa'
 import Navbar from '../components/layout/Navbar'
@@ -20,14 +21,16 @@ const Login = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Simple demo authentication
-    if (formData.email === 'admin@editflow.com' && formData.password === 'admin123') {
+    setError('')
+    try {
+      const res = await loginAdmin(formData)
       localStorage.setItem('isAuthenticated', 'true')
+      localStorage.setItem('token', res?.data?.token || '')
       navigate('/admin')
-    } else {
-      setError('Invalid credentials')
+    } catch (err) {
+      setError(err?.response?.data?.message || 'Invalid credentials')
     }
   }
 

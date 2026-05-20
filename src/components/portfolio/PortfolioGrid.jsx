@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import PortfolioCard from './PortfolioCard'
 import PortfolioFilter from './PortfolioFilter'
+import VideoModal from './VideoModal'
 
 const PortfolioGrid = ({ projects }) => {
   const [filter, setFilter] = useState('all')
@@ -20,7 +21,7 @@ const PortfolioGrid = ({ projects }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredProjects.map((project) => (
           <PortfolioCard 
-            key={project.id} 
+            key={project._id || project.id} 
             project={project} 
             onClick={() => setSelectedProject(project)}
           />
