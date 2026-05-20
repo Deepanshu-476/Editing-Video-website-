@@ -35,9 +35,11 @@ const Navbar = () => {
             <div className="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
               <FaPlay className="text-white text-xl" />
             </div>
-            <span className="text-2xl font-bold gradient-text">
-              NishMediaCo.
-            </span>
+            <img
+              src="/favicon.svg"
+              alt="EditFlow logo"
+              className="h-8 w-auto"
+            />
           </Link>
 
           {/* Desktop Menu */}
