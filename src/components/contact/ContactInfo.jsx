@@ -1,6 +1,6 @@
 // src/components/contact/ContactInfo.jsx
-import React from 'react'
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaClock } from 'react-icons/fa'
+import React from 'react';
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaClock } from 'react-icons/fa';
 
 const ContactInfo = () => {
   const info = [
@@ -24,7 +24,7 @@ const ContactInfo = () => {
       title: 'Working Hours',
       details: ['Mon-Fri: 9am - 6pm', 'Sat-Sun: 10am - 4pm']
     }
-  ]
+  ];
 
   return (
     <div className="space-y-6">
@@ -40,7 +40,7 @@ const ContactInfo = () => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default ContactInfo
+export default ContactInfo;

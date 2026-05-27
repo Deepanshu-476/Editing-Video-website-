@@ -1,6 +1,6 @@
-// Update src/context/AuthContext.jsx to use real API
+// src/context/AuthContext.jsx
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import authService from '../services/authService';
+import { loginAdmin, getMe, logout as logoutService } from '../services/authService';
 
 const AuthContext = createContext();
 
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('token');
     if (token) {
       try {
-        const response = await authService.getCurrentUser();
+        const response = await getMe(token);
         if (response.success) {
           setIsAuthenticated(true);
           setUser(response.data);
@@ -33,6 +33,7 @@ export const AuthProvider = ({ children }) => {
           logout();
         }
       } catch (error) {
+        console.error('Auth check error:', error);
         logout();
       }
     }
@@ -41,43 +42,54 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await authService.login(email, password);
+      const response = await loginAdmin({ email, password });
       if (response.success) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
         setIsAuthenticated(true);
         setUser(response.data.user);
         return { success: true };
       }
       return { success: false, message: response.message };
     } catch (error) {
-      return { success: false, message: error.message };
+      console.error('Login error:', error);
+      return { success: false, message: error.response?.data?.message || 'Login failed' };
     }
   };
 
   const logout = async () => {
-    await authService.logout();
-    setIsAuthenticated(false);
-    setUser(null);
+    try {
+      await logoutService();
+    } catch (error) {
+      console.error('Logout error:', error);
+    } finally {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      setIsAuthenticated(false);
+      setUser(null);
+    }
   };
 
-  const updateProfile = async (userData) => {
+  const updateUserProfile = async (userData) => {
     try {
-      const response = await authService.updateProfile(userData);
+      const response = await updateProfile(userData);
       if (response.success) {
         setUser(response.data);
+        localStorage.setItem('user', JSON.stringify(response.data));
         return { success: true };
       }
       return { success: false, message: response.message };
     } catch (error) {
-      return { success: false, message: error.message };
+      return { success: false, message: error.response?.data?.message || 'Update failed' };
     }
   };
 
-  const changePassword = async (currentPassword, newPassword) => {
+  const changeUserPassword = async (currentPassword, newPassword) => {
     try {
-      const response = await authService.changePassword(currentPassword, newPassword);
+      const response = await changePassword(currentPassword, newPassword);
       return { success: response.success, message: response.message };
     } catch (error) {
-      return { success: false, message: error.message };
+      return { success: false, message: error.response?.data?.message || 'Password change failed' };
     }
   };
 
@@ -88,8 +100,8 @@ export const AuthProvider = ({ children }) => {
       loading,
       login,
       logout,
-      updateProfile,
-      changePassword
+      updateUserProfile,
+      changeUserPassword
     }}>
       {children}
     </AuthContext.Provider>

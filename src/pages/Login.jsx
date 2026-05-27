@@ -1,18 +1,20 @@
 // src/pages/Login.jsx
 import React, { useState } from 'react'
-import { loginAdmin } from '../services/authService'
 import { useNavigate } from 'react-router-dom'
 import { FaEnvelope, FaLock, FaSignInAlt } from 'react-icons/fa'
+import { useAuth } from '../context/AuthContext'
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 
 const Login = () => {
   const navigate = useNavigate()
+  const { login } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
     setFormData({
@@ -24,14 +26,17 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
-    try {
-      const res = await loginAdmin(formData)
-      localStorage.setItem('isAuthenticated', 'true')
-      localStorage.setItem('token', res?.data?.token || '')
+    setLoading(true)
+
+    const result = await login(formData.email, formData.password)
+    
+    if (result.success) {
       navigate('/admin')
-    } catch (err) {
-      setError(err?.response?.data?.message || 'Invalid credentials')
+    } else {
+      setError(result.message || 'Invalid credentials')
     }
+    
+    setLoading(false)
   }
 
   return (
@@ -80,10 +85,15 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="w-full gradient-bg py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+                disabled={loading}
+                className="w-full gradient-bg py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50"
               >
-                Login
-                <FaSignInAlt />
+                {loading ? 'Logging in...' : (
+                  <>
+                    Login
+                    <FaSignInAlt />
+                  </>
+                )}
               </button>
             </form>
 
