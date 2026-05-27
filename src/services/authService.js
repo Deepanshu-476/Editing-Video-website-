@@ -38,4 +38,4 @@ const authService = {
   logout
 }
 
-export default authService
+export default authService;
