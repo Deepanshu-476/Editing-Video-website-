@@ -8,8 +8,8 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
       {/* Background Video/Image */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 to-pink-900/30 z-10"></div>
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1536240474400-b3b3aae3a8f5?ixlib=rb-4.0.3')] bg-cover bg-center opacity-20"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-white via-teal-50/90 to-indigo-50/80 z-10"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1536240474400-b3b3aae3a8f5?ixlib=rb-4.0.3')] bg-cover bg-center opacity-10"></div>
       </div>
 
       <div className="container-custom relative z-10">
@@ -19,7 +19,7 @@ const HeroSection = () => {
               Transform Your
               <span className="gradient-text block">Vision Into Reality</span>
             </h1>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
               Professional video editing services that bring stories to life. 
               We create stunning visuals that captivate your audience.
             </p>
@@ -33,7 +33,7 @@ const HeroSection = () => {
               </Link>
               <Link
                 to="/contact"
-                className="border-2 border-white/30 px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition-all duration-300"
+                className="border-2 border-slate-300 px-8 py-3 rounded-full font-semibold text-slate-800 hover:border-teal-500 hover:text-teal-700 hover:bg-teal-50 transition-all duration-300"
               >
                 Get Started
               </Link>
@@ -41,7 +41,7 @@ const HeroSection = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-8 border-t border-white/10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-8 border-t border-slate-200">
             {[
               { number: '500+', label: 'Projects Completed' },
               { number: '98%', label: 'Client Satisfaction' },
@@ -50,7 +50,7 @@ const HeroSection = () => {
             ].map((stat, index) => (
               <div key={index} className="text-center fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                 <div className="text-3xl md:text-4xl font-bold gradient-text">{stat.number}</div>
-                <div className="text-gray-400 text-sm mt-2">{stat.label}</div>
+                <div className="text-slate-500 text-sm mt-2">{stat.label}</div>
               </div>
             ))}
           </div>

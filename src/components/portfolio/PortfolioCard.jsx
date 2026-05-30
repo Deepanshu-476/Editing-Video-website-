@@ -1,8 +1,15 @@
 // src/components/portfolio/PortfolioCard.jsx
 import React from 'react';
-import { FaPlay, FaYoutube, FaVideo } from 'react-icons/fa';
+import { FaPlay, FaVideo } from 'react-icons/fa';
+import { IMAGE_URL } from '../../services/api';
 
 const PortfolioCard = ({ project, onClick }) => {
+  const resolveMediaUrl = (url) => {
+    if (!url || url === '#') return null;
+    if (/^https?:\/\//i.test(url)) return url;
+    return `${IMAGE_URL}${url.startsWith('/') ? url : `/${url}`}`;
+  };
+
   // Get YouTube video ID from URL
   const getYouTubeThumbnail = (url) => {
     if (!url) return null;
@@ -10,11 +17,18 @@ const PortfolioCard = ({ project, onClick }) => {
     return match ? `https://img.youtube.com/vi/${match[1]}/mqdefault.jpg` : null;
   };
 
-  const thumbnail = project.thumbnail || getYouTubeThumbnail(project.videoUrl);
+  const videoUrl =
+    project.videoUrl ||
+    project.video ||
+    project.videoFile ||
+    project.fileUrl ||
+    project.url;
+  const thumbnail = resolveMediaUrl(project.thumbnail) || getYouTubeThumbnail(videoUrl);
+  const uploadedVideoUrl = resolveMediaUrl(videoUrl);
 
   return (
     <div className="group cursor-pointer" onClick={onClick}>
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900">
+      <div className="relative overflow-hidden rounded-2xl bg-white border border-slate-200 shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
         {/* Thumbnail */}
         <div className="aspect-video relative">
           {thumbnail ? (
@@ -23,8 +37,16 @@ const PortfolioCard = ({ project, onClick }) => {
               alt={project.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
+          ) : uploadedVideoUrl ? (
+            <video
+              src={uploadedVideoUrl}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              muted
+              playsInline
+              preload="metadata"
+            />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-purple-900 to-pink-900 flex items-center justify-center">
+            <div className="w-full h-full bg-gradient-to-br from-slate-900 via-teal-900 to-indigo-900 flex items-center justify-center">
               <FaVideo className="text-white text-5xl opacity-50" />
             </div>
           )}
@@ -46,12 +68,12 @@ const PortfolioCard = ({ project, onClick }) => {
         
         {/* Card Info */}
         <div className="p-4">
-          <h3 className="text-white font-semibold text-lg mb-1 line-clamp-1">{project.title}</h3>
-          <p className="text-gray-400 text-sm mb-2 line-clamp-2">{project.description}</p>
+          <h3 className="text-slate-950 font-semibold text-lg mb-1 line-clamp-1">{project.title}</h3>
+          <p className="text-slate-600 text-sm mb-2 line-clamp-2">{project.description}</p>
           <div className="flex items-center justify-between">
-            <span className="text-xs text-purple-400 capitalize">{project.category}</span>
+            <span className="text-xs text-teal-700 font-medium capitalize">{project.category}</span>
             {project.client && (
-              <span className="text-xs text-gray-500">{project.client}</span>
+              <span className="text-xs text-slate-500">{project.client}</span>
             )}
           </div>
         </div>

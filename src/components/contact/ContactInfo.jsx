@@ -34,7 +34,7 @@ const ContactInfo = () => {
           <div>
             <h3 className="font-semibold text-lg mb-1">{item.title}</h3>
             {item.details.map((detail, i) => (
-              <p key={i} className="text-gray-400">{detail}</p>
+              <p key={i} className="text-slate-600">{detail}</p>
             ))}
           </div>
         </div>

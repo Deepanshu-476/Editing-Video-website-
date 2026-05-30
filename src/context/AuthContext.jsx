@@ -1,6 +1,12 @@
 // src/context/AuthContext.jsx
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { loginAdmin, getMe, logout as logoutService } from '../services/authService';
+import {
+  loginAdmin,
+  getMe,
+  logout as logoutService,
+  updateProfile,
+  changePassword
+} from '../services/authService';
 
 const AuthContext = createContext();
 
@@ -43,17 +49,31 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const response = await loginAdmin({ email, password });
-      if (response.success) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+      const token = response.data?.token || response.token;
+      const loggedInUser = response.data?.user || response.user || null;
+
+      if (response.success && token) {
+        localStorage.setItem('token', token);
+        localStorage.setItem('isAuthenticated', 'true');
+
+        if (loggedInUser) {
+          localStorage.setItem('user', JSON.stringify(loggedInUser));
+        }
+
         setIsAuthenticated(true);
-        setUser(response.data.user);
+        setUser(loggedInUser);
         return { success: true };
       }
       return { success: false, message: response.message };
     } catch (error) {
       console.error('Login error:', error);
-      return { success: false, message: error.response?.data?.message || 'Login failed' };
+      const message =
+        error.response?.data?.message ||
+        error.response?.data?.error ||
+        error.message ||
+        'Login failed';
+
+      return { success: false, message };
     }
   };
 
@@ -65,6 +85,7 @@ export const AuthProvider = ({ children }) => {
     } finally {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      localStorage.removeItem('isAuthenticated');
       setIsAuthenticated(false);
       setUser(null);
     }

@@ -22,13 +22,13 @@ const PortfolioGrid = ({ projects }) => {
       
       {filteredProjects.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-400">No projects found in this category.</p>
+          <p className="text-slate-600">No projects found in this category.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
             <PortfolioCard 
-              key={project.id} 
+              key={project.id || project._id} 
               project={project} 
               onClick={() => setSelectedProject(project)}
             />

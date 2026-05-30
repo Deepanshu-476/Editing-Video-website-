@@ -1,9 +1,16 @@
 // src/components/portfolio/VideoModal.jsx
 import React, { useEffect, useState } from 'react';
-import { FaTimes, FaYoutube, FaVideo } from 'react-icons/fa';
+import { FaTimes, FaVideo } from 'react-icons/fa';
+import { IMAGE_URL } from '../../services/api';
 
 const VideoModal = ({ project, onClose }) => {
   const [isLoading, setIsLoading] = useState(true);
+
+  const resolveMediaUrl = (url) => {
+    if (!url || url === '#') return null;
+    if (/^https?:\/\//i.test(url)) return url;
+    return `${IMAGE_URL}${url.startsWith('/') ? url : `/${url}`}`;
+  };
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -33,8 +40,21 @@ const VideoModal = ({ project, onClose }) => {
     return videoId ? `https://www.youtube.com/embed/${videoId}?autoplay=1` : null;
   };
 
-  const embedUrl = getYouTubeEmbedUrl(project.videoUrl);
+  const sourceVideoUrl =
+    project.videoUrl ||
+    project.video ||
+    project.videoFile ||
+    project.fileUrl ||
+    project.url;
+  const embedUrl = getYouTubeEmbedUrl(sourceVideoUrl);
   const isYouTube = embedUrl && embedUrl.includes('youtube.com');
+  const videoUrl = resolveMediaUrl(sourceVideoUrl);
+  const tags = Array.isArray(project.tags)
+    ? project.tags
+    : String(project.tags || '')
+        .split(',')
+        .map((tag) => tag.trim())
+        .filter(Boolean);
 
   return (
     <div 
@@ -42,7 +62,7 @@ const VideoModal = ({ project, onClose }) => {
       onClick={onClose}
     >
       <div 
-        className="relative max-w-5xl w-full bg-darker rounded-2xl overflow-hidden shadow-2xl"
+        className="relative max-w-5xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
@@ -68,10 +88,10 @@ const VideoModal = ({ project, onClose }) => {
               ></iframe>
             </div>
           ) : (
-            <div className="aspect-video bg-gradient-to-br from-purple-900 to-pink-900 flex items-center justify-center">
-              {project.videoUrl ? (
+            <div className="aspect-video bg-gradient-to-br from-slate-900 via-teal-900 to-indigo-900 flex items-center justify-center">
+              {videoUrl ? (
                 <video
-                  src={project.videoUrl}
+                  src={videoUrl}
                   controls
                   autoPlay
                   className="w-full h-full object-contain"
@@ -80,7 +100,7 @@ const VideoModal = ({ project, onClose }) => {
               ) : (
                 <div className="text-center">
                   <FaVideo className="text-white text-6xl mb-4 opacity-50" />
-                  <p className="text-gray-300">Video preview not available</p>
+                  <p className="text-white/80">Video preview not available</p>
                 </div>
               )}
             </div>
@@ -89,38 +109,38 @@ const VideoModal = ({ project, onClose }) => {
           {/* Loading Spinner */}
           {isLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-black/80">
-              <div className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+              <div className="w-12 h-12 border-4 border-teal-500 border-t-transparent rounded-full animate-spin"></div>
             </div>
           )}
         </div>
 
         {/* Video Info */}
-        <div className="p-6 bg-darker">
+        <div className="p-6 bg-white">
           <div className="flex items-center gap-2 mb-3">
-            <span className="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs capitalize">
+            <span className="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-xs capitalize">
               {project.category}
             </span>
             {project.duration && (
-              <span className="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-xs">
+              <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs">
                 {project.duration}
               </span>
             )}
           </div>
           
-          <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
-          <p className="text-gray-400 mb-4 leading-relaxed">{project.description}</p>
+          <h3 className="text-2xl font-bold text-slate-950 mb-2">{project.title}</h3>
+          <p className="text-slate-600 mb-4 leading-relaxed">{project.description}</p>
           
           {project.client && (
-            <div className="flex items-center gap-2 text-sm text-gray-500">
+            <div className="flex items-center gap-2 text-sm text-slate-500">
               <span>Client:</span>
-              <span className="text-gray-300">{project.client}</span>
+              <span className="text-slate-700">{project.client}</span>
             </div>
           )}
           
-          {project.tags && project.tags.length > 0 && (
+          {tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-4">
-              {project.tags.map((tag, index) => (
-                <span key={index} className="px-2 py-1 bg-gray-800 text-gray-400 rounded text-xs">
+              {tags.map((tag, index) => (
+                <span key={index} className="px-2 py-1 bg-slate-100 text-slate-600 rounded text-xs">
                   #{tag}
                 </span>
               ))}

@@ -25,18 +25,24 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (loading) return
+
     setError('')
     setLoading(true)
 
-    const result = await login(formData.email, formData.password)
-    
-    if (result.success) {
-      navigate('/admin')
-    } else {
-      setError(result.message || 'Invalid credentials')
+    try {
+      const result = await login(formData.email.trim(), formData.password)
+
+      if (result.success) {
+        navigate('/admin', { replace: true })
+      } else {
+        setError(result.message || 'Invalid credentials')
+      }
+    } catch (error) {
+      setError(error.message || 'Unable to login right now')
+    } finally {
+      setLoading(false)
     }
-    
-    setLoading(false)
   }
 
   return (
@@ -44,15 +50,15 @@ const Login = () => {
       <Navbar />
       <div className="min-h-screen flex items-center justify-center pt-32 pb-20">
         <div className="container-custom max-w-md">
-          <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+          <div className="bg-white border border-slate-200 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold gradient-text mb-2">Admin Login</h2>
-              <p className="text-gray-400">Access the admin dashboard</p>
+              <p className="text-slate-600">Access the admin dashboard</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="relative">
-                <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" />
                 <input
                   type="email"
                   name="email"
@@ -60,12 +66,12 @@ const Login = () => {
                   onChange={handleChange}
                   required
                   placeholder="Email"
-                  className="w-full pl-12 pr-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-purple-500 text-white"
+                  className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-teal-500 text-slate-950"
                 />
               </div>
 
               <div className="relative">
-                <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <FaLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" />
                 <input
                   type="password"
                   name="password"
@@ -73,7 +79,7 @@ const Login = () => {
                   onChange={handleChange}
                   required
                   placeholder="Password"
-                  className="w-full pl-12 pr-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-purple-500 text-white"
+                  className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-teal-500 text-slate-950"
                 />
               </div>
 

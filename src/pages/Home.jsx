@@ -1,6 +1,6 @@
 // src/pages/Home.jsx
 import React, { useState, useEffect } from 'react';
-import { getFeaturedProjects } from '../services/portfolioService';
+import { getAllProjects } from '../services/portfolioService';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import HeroSection from '../components/home/HeroSection';
@@ -13,21 +13,33 @@ import WhatsAppButton from '../components/common/WhatsAppButton';
 import Loader from '../components/common/Loader';
 
 const Home = () => {
-  const [featuredProjects, setFeaturedProjects] = useState([]);
+  const [showreelProjects, setShowreelProjects] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadFeaturedProjects();
+    loadShowreelProjects();
   }, []);
 
-  const loadFeaturedProjects = async () => {
+  const normalizeProjects = (response) => {
+    const projects = Array.isArray(response?.data)
+      ? response.data
+      : response.data?.projects || response.projects || [];
+
+    return [...projects].sort((a, b) => {
+      const firstDate = new Date(b.createdAt || b.updatedAt || 0).getTime();
+      const secondDate = new Date(a.createdAt || a.updatedAt || 0).getTime();
+      return firstDate - secondDate;
+    });
+  };
+
+  const loadShowreelProjects = async () => {
     try {
-      const response = await getFeaturedProjects();
+      const response = await getAllProjects(1, 8);
       if (response.success) {
-        setFeaturedProjects(response.data);
+        setShowreelProjects(normalizeProjects(response));
       }
     } catch (error) {
-      console.error('Error loading featured projects:', error);
+      console.error('Error loading showreel projects:', error);
     } finally {
       setLoading(false);
     }
@@ -47,7 +59,7 @@ const Home = () => {
     <>
       <Navbar />
       <HeroSection />
-      <ShowreelSection />
+      <ShowreelSection projects={showreelProjects} />
       <HowItWorks />
       <TrustSection />
       <Testimonials />

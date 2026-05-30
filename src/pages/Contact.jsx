@@ -26,7 +26,7 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
               <ContactInfo />
-              <div className="mt-8 pt-8 border-t border-gray-800">
+              <div className="mt-8 pt-8 border-t border-slate-200">
                 <SocialLinks />
               </div>
             </div>

@@ -8,11 +8,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#8b5cf6',
-        secondary: '#ec4899',
-        accent: '#f43f5e',
-        dark: '#0a0a0a',
-        darker: '#050505',
+        primary: '#0f766e',
+        secondary: '#2563eb',
+        accent: '#f59e0b',
+        dark: '#f8fafc',
+        darker: '#ffffff',
       },
       animation: {
         'fade-in': 'fadeIn 0.8s ease-out',

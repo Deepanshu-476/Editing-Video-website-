@@ -26,8 +26,8 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      scrolled ? 'bg-darker/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
+    <nav className={`fixed w-full z-50 border-b border-slate-200/70 transition-all duration-300 ${
+      scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white/85 backdrop-blur-sm'
     }`}>
       <div className="container-custom">
         <div className="flex justify-between items-center py-4">
@@ -47,8 +47,8 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative text-gray-300 hover:text-white transition-colors duration-300 group ${
-                  isActive(link.path) ? 'text-white' : ''
+                className={`relative text-slate-600 hover:text-slate-950 transition-colors duration-300 group ${
+                  isActive(link.path) ? 'text-slate-950' : ''
                 }`}
               >
                 {link.label}
@@ -62,7 +62,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white text-2xl"
+            className="md:hidden text-slate-900 text-2xl"
           >
             {isOpen ? <FaTimes /> : <FaBars />}
           </button>
@@ -77,8 +77,8 @@ const Navbar = () => {
               key={link.path}
               to={link.path}
               onClick={() => setIsOpen(false)}
-              className={`block py-3 text-gray-300 hover:text-white transition-colors ${
-                isActive(link.path) ? 'text-white' : ''
+              className={`block py-3 text-slate-600 hover:text-slate-950 transition-colors ${
+                isActive(link.path) ? 'text-slate-950' : ''
               }`}
             >
               {link.label}

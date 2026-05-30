@@ -8,10 +8,10 @@ const PortfolioFilter = ({ categories, filter, setFilter }) => {
         <button
           key={category}
           onClick={() => setFilter(category)}
-          className={`px-6 py-2 rounded-full capitalize transition-all duration-300 ${
+          className={`px-6 py-2 rounded-full border capitalize transition-all duration-300 ${
             filter === category
-              ? 'gradient-bg text-white shadow-lg'
-              : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+              ? 'gradient-bg text-white border-transparent shadow-lg'
+              : 'bg-white text-slate-600 border-slate-200 hover:border-teal-400 hover:text-teal-700 hover:bg-teal-50'
           }`}
         >
           {category}

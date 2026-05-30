@@ -10,14 +10,16 @@ const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard')
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
     const isAuthenticated = localStorage.getItem('isAuthenticated')
-    if (!isAuthenticated) {
+
+    if (!token && !isAuthenticated) {
       navigate('/login')
     }
   }, [navigate])
 
   return (
-    <div className="min-h-screen bg-darker">
+    <div className="min-h-screen bg-slate-50">
       <AdminSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       <div className="min-h-screen md:ml-64">
@@ -34,9 +36,9 @@ const AdminDashboard = () => {
                   { label: 'Pending Reviews', value: '6', change: '-2%' },
                   { label: 'Revenue', value: '$45.2k', change: '+23%' }
                 ].map((stat, index) => (
-                  <div key={index} className="bg-gray-900 rounded-xl p-6">
-                    <p className="text-gray-400 text-sm mb-2">{stat.label}</p>
-                    <p className="text-3xl font-bold text-white mb-2">{stat.value}</p>
+                  <div key={index} className="bg-white border border-slate-200 rounded-xl p-6 shadow-lg">
+                    <p className="text-slate-500 text-sm mb-2">{stat.label}</p>
+                    <p className="text-3xl font-bold text-slate-950 mb-2">{stat.value}</p>
                     <span className={`text-sm ${stat.change.startsWith('+') ? 'text-green-500' : 'text-red-500'}`}>
                       {stat.change} from last month
                     </span>

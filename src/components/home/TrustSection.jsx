@@ -27,14 +27,14 @@ const TrustSection = () => {
   ]
 
   return (
-    <section className="py-20 bg-darker">
+    <section className="py-20 bg-white">
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Why <span className="gradient-text">Trust Us</span> With Your Vision
             </h2>
-            <p className="text-gray-400 mb-8">
+            <p className="text-slate-600 mb-8">
               With over 500+ successful projects and a team of passionate editors, 
               we've helped countless content creators, businesses, and agencies 
               elevate their video content to new heights.
@@ -42,11 +42,11 @@ const TrustSection = () => {
             
             <div className="space-y-4">
               {features.map((feature, index) => (
-                <div key={index} className="flex items-start space-x-4 p-4 rounded-lg hover:bg-white/5 transition-colors">
+                <div key={index} className="flex items-start space-x-4 p-4 rounded-lg hover:bg-slate-50 transition-colors">
                   <div className="gradient-text">{feature.icon}</div>
                   <div>
                     <h3 className="font-semibold text-lg mb-1">{feature.title}</h3>
-                    <p className="text-gray-400">{feature.description}</p>
+                    <p className="text-slate-600">{feature.description}</p>
                   </div>
                 </div>
               ))}
@@ -54,11 +54,11 @@ const TrustSection = () => {
           </div>
 
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur-3xl opacity-20"></div>
-            <div className="relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-2xl p-8 backdrop-blur-sm">
+            <div className="absolute inset-0 bg-gradient-to-r from-teal-400 to-indigo-500 rounded-2xl blur-3xl opacity-20"></div>
+            <div className="relative bg-white rounded-2xl p-8 backdrop-blur-sm border border-slate-200 shadow-2xl">
               <div className="text-center mb-6">
                 <div className="text-6xl font-bold gradient-text mb-2">98%</div>
-                <p className="text-gray-300">Client Retention Rate</p>
+                <p className="text-slate-600">Client Retention Rate</p>
               </div>
               <div className="space-y-4">
                 <div>

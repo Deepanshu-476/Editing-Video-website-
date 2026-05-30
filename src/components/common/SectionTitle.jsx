@@ -13,7 +13,7 @@ const SectionTitle = ({ title, subtitle, centered = true }) => {
           )
         )}
       </h2>
-      {subtitle && <p className="text-gray-400 max-w-2xl mx-auto">{subtitle}</p>}
+      {subtitle && <p className="text-slate-600 max-w-2xl mx-auto">{subtitle}</p>}
     </div>
   )
 }

@@ -52,7 +52,7 @@ const ContactForm = () => {
       )}
 
       <div className="relative">
-        <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+        <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" />
         <input
           type="text"
           name="name"
@@ -60,12 +60,12 @@ const ContactForm = () => {
           onChange={handleChange}
           required
           placeholder="Your Name"
-          className="w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:border-purple-500 transition-colors text-white"
+          className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-teal-500 transition-colors text-slate-950"
         />
       </div>
 
       <div className="relative">
-        <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+        <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" />
         <input
           type="email"
           name="email"
@@ -73,24 +73,24 @@ const ContactForm = () => {
           onChange={handleChange}
           required
           placeholder="Your Email"
-          className="w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:border-purple-500 transition-colors text-white"
+          className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-teal-500 transition-colors text-slate-950"
         />
       </div>
 
       <div className="relative">
-        <FaPhone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+        <FaPhone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" />
         <input
           type="tel"
           name="phone"
           value={formData.phone}
           onChange={handleChange}
           placeholder="Your Phone (Optional)"
-          className="w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:border-purple-500 transition-colors text-white"
+          className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-teal-500 transition-colors text-slate-950"
         />
       </div>
 
       <div className="relative">
-        <FaComment className="absolute left-4 top-4 text-gray-400" />
+        <FaComment className="absolute left-4 top-4 text-slate-400" />
         <textarea
           name="message"
           value={formData.message}
@@ -98,7 +98,7 @@ const ContactForm = () => {
           required
           placeholder="Tell us about your project"
           rows="5"
-          className="w-full pl-12 pr-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg focus:outline-none focus:border-purple-500 transition-colors text-white resize-none"
+          className="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-teal-500 transition-colors text-slate-950 resize-none"
         ></textarea>
       </div>
 

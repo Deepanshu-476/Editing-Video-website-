@@ -1,16 +1,19 @@
 // src/pages/Portfolio.jsx
-import React, { useState, useEffect } from 'react';
-import { getAllProjects } from '../services/portfolioService'; // ✅ Yeh sahi hai
-// OR
-// import portfolioService from '../services/portfolioService';
-// const getAllProjects = portfolioService.getAllProjects;
-
+import React, { useEffect, useState } from 'react';
+import { getAllProjects } from '../services/portfolioService';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import PageBanner from '../components/layout/PageBanner';
 import PortfolioGrid from '../components/portfolio/PortfolioGrid';
 import WhatsAppButton from '../components/common/WhatsAppButton';
 import Loader from '../components/common/Loader';
+
+const normalizeProjects = (response) => {
+  if (Array.isArray(response?.data)) return response.data;
+  if (Array.isArray(response?.data?.projects)) return response.data.projects;
+  if (Array.isArray(response?.projects)) return response.projects;
+  return [];
+};
 
 const Portfolio = () => {
   const [projects, setProjects] = useState([]);
@@ -24,17 +27,18 @@ const Portfolio = () => {
   const loadProjects = async () => {
     try {
       setLoading(true);
+      setError(null);
+
       const response = await getAllProjects(1, 50);
-      console.log('API Response:', response); // Debug log
-      
+
       if (response.success) {
-        setProjects(response.data);
+        setProjects(normalizeProjects(response));
       } else {
         setError(response.message || 'Failed to load projects');
       }
     } catch (err) {
       console.error('Error loading projects:', err);
-      setError(err.message || 'Failed to load projects. Please try again later.');
+      setError(err.message || err || 'Failed to load projects. Please try again later.');
     } finally {
       setLoading(false);
     }
@@ -44,7 +48,7 @@ const Portfolio = () => {
     return (
       <>
         <Navbar />
-        <PageBanner 
+        <PageBanner
           title="Our Portfolio"
           subtitle="Explore our best work and see what we can create for you"
         />
@@ -58,13 +62,13 @@ const Portfolio = () => {
     return (
       <>
         <Navbar />
-        <PageBanner 
+        <PageBanner
           title="Our Portfolio"
           subtitle="Explore our best work and see what we can create for you"
         />
         <div className="container-custom py-20 text-center">
           <p className="text-red-500">{error}</p>
-          <button 
+          <button
             onClick={loadProjects}
             className="mt-4 px-6 py-2 gradient-bg rounded-lg text-white"
           >
@@ -79,7 +83,7 @@ const Portfolio = () => {
   return (
     <>
       <Navbar />
-      <PageBanner 
+      <PageBanner
         title="Our Portfolio"
         subtitle="Explore our best work and see what we can create for you"
       />
@@ -87,7 +91,7 @@ const Portfolio = () => {
         <div className="container-custom">
           {projects.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-gray-400">No projects found. Upload some videos from admin panel.</p>
+              <p className="text-slate-600">No projects found. Upload some videos from admin panel.</p>
             </div>
           ) : (
             <PortfolioGrid projects={projects} />

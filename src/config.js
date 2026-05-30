@@ -1,7 +1,11 @@
 const config = {
   apiBaseUrl:
+    import.meta.env.VITE_API_URL ||
     import.meta.env.VITE_API_BASE_URL ||
-    "http://localhost:5000/api",
+    "https://editing-video-backend.onrender.com/api",
+  imageBaseUrl:
+    import.meta.env.VITE_IMAGE_URL ||
+    "https://editing-video-backend.onrender.com",
 };
 
 export default config;

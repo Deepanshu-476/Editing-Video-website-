@@ -5,7 +5,7 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaYoutube, FaPlay } fro
 
 const Footer = () => {
   return (
-    <footer className="bg-darker py-12 border-t border-gray-800">
+    <footer className="bg-white py-12 border-t border-slate-200">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
@@ -15,23 +15,23 @@ const Footer = () => {
               </div>
               <span className="text-2xl font-bold gradient-text">EditFlow</span>
             </Link>
-            <p className="text-gray-400 mb-4">
+            <p className="text-slate-600 mb-4">
               Professional video editing services that bring your vision to life with creativity and precision.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-slate-500 hover:text-teal-700 transition-colors">
                 <FaFacebook size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-slate-500 hover:text-teal-700 transition-colors">
                 <FaTwitter size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-slate-500 hover:text-teal-700 transition-colors">
                 <FaInstagram size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-slate-500 hover:text-teal-700 transition-colors">
                 <FaLinkedin size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a href="#" className="text-slate-500 hover:text-teal-700 transition-colors">
                 <FaYoutube size={20} />
               </a>
             </div>
@@ -40,25 +40,25 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link to="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
-              <li><Link to="/portfolio" className="text-gray-400 hover:text-white transition-colors">Portfolio</Link></li>
-              <li><Link to="/contact" className="text-gray-400 hover:text-white transition-colors">Contact</Link></li>
+              <li><Link to="/" className="text-slate-600 hover:text-teal-700 transition-colors">Home</Link></li>
+              <li><Link to="/portfolio" className="text-slate-600 hover:text-teal-700 transition-colors">Portfolio</Link></li>
+              <li><Link to="/contact" className="text-slate-600 hover:text-teal-700 transition-colors">Contact</Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-xl font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Video Editing</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Color Grading</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Motion Graphics</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors">Sound Design</a></li>
+              <li><a href="#" className="text-slate-600 hover:text-teal-700 transition-colors">Video Editing</a></li>
+              <li><a href="#" className="text-slate-600 hover:text-teal-700 transition-colors">Color Grading</a></li>
+              <li><a href="#" className="text-slate-600 hover:text-teal-700 transition-colors">Motion Graphics</a></li>
+              <li><a href="#" className="text-slate-600 hover:text-teal-700 transition-colors">Sound Design</a></li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-xl font-semibold mb-4">Contact Info</h3>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-slate-600">
               <li>123 Creative Street</li>
               <li>Los Angeles, CA 90001</li>
               <li>Email: hello@editflow.com</li>
@@ -67,7 +67,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-gray-800 text-center text-gray-400">
+        <div className="pt-8 border-t border-slate-200 text-center text-slate-500">
           <p>&copy; 2024 EditFlow. All rights reserved.</p>
         </div>
       </div>
