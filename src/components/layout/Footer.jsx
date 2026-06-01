@@ -1,7 +1,7 @@
 // src/components/layout/Footer.jsx
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaYoutube, FaPlay } from 'react-icons/fa'
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa'
 
 const Footer = () => {
   return (
@@ -10,10 +10,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <Link to="/" className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 gradient-bg rounded-lg flex items-center justify-center">
-                <FaPlay className="text-white text-xl" />
-              </div>
-              <span className="text-2xl font-bold gradient-text">EditFlow</span>
+              <img
+                src="/logo.png"
+                alt="EditFlow logo"
+                className="h-14 w-auto"
+              />
             </Link>
             <p className="text-slate-600 mb-4">
               Professional video editing services that bring your vision to life with creativity and precision.
